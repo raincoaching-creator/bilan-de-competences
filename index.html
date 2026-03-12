@@ -1086,7 +1086,7 @@
 </footer>
 
 <!-- ===== JS ===== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Accordion
   function toggleAccordion(btn) {
     const item = btn.closest('.accordion__item');
@@ -1095,4 +1095,21 @@
     // close all
     document.querySelectorAll('.accordion__item').forEach(i => {
       i.classList.remove('open');
-      i.
+      i.querySelector('.accordion__body').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
